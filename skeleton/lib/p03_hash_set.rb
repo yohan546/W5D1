@@ -7,6 +7,9 @@ class HashSet
   end
 
   def insert(key)
+    val = key.hash % num_buckets
+    @store[val] << key.hash
+
   end
 
   def include?(key)
@@ -19,6 +22,7 @@ class HashSet
 
   def [](num)
     # optional but useful; return the bucket corresponding to `num`
+    @store[num]
   end
 
   def num_buckets
