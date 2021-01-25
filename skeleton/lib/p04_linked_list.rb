@@ -22,7 +22,6 @@ end
 class LinkedList
   include Enumerable
   def initialize
-
     @sentinal = Node.new
     @head = @sentinal
     @tail = @sentinal
@@ -36,13 +35,15 @@ class LinkedList
   end
 
   def first
+    @head
   end
 
   def last
+    @tail
   end
 
   def empty?
-    self.empty?
+    
   end
 
   def get(key)
@@ -52,6 +53,7 @@ class LinkedList
   end
 
   def append(key, val)
+      self.last = Node.new(key,val)
   end
 
   def update(key, val)
