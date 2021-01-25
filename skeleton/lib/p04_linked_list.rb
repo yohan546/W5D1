@@ -22,6 +22,7 @@ end
 class LinkedList
   include Enumerable
   def initialize
+
     @sentinal = Node.new
     @head = @sentinal
     @tail = @sentinal
@@ -35,25 +36,77 @@ class LinkedList
   end
 
   def first
-    @head
+    empty? ? nil: self.head.next 
   end
 
   def last
-    @tail
+    empty? ? nil: self.tail.prev
   end
 
   def empty?
-    
+    self.head.next == self.tail
   end
 
   def get(key)
   end
 
   def include?(key)
+    any? { |node| node.key == key}
   end
 
   def append(key, val)
-      self.last = Node.new(key,val)
+    new_node = Node.new(key, val)
+
+    #                   head_node -> node_1                       node_2 <- tail_node
+    #                                  |                             |
+    #                              prev-nil, next-nil       prev-nil, next-node_3
+    #                                                           
+    # append node_3
+
+    #                   head_node -> node_1                       node_2 <- tail_node
+    #                                  |                             |
+    #                              prev-nil, next-nil       prev-nil, next-node3
+    #                                                                         |
+    #                                                              prev-node_2, next-tail_node
+
+
+    #                  head_node -> node_1                      next_node3 <- tail_node
+    #                                 |                             |
+    #                             prev-nil, next-nil    prev-node_2, next-tail_node
+    #                                                                                 
+    # 
+     #                  head_node -> node_1                      next_node3 <- tail_node
+    #                                 |                             |
+    #                             prev-nil, next-nil    prev-node_2, next-tail_node    
+    
+    #append node_4
+   #                  head_node -> node_1                      next_node3 <- tail_node
+    #                                 |                             |
+    #                             prev-nil, next-nil    prev-node_2, next-node_4    
+
+
+
+
+      #                  head_node -> node_1                      next_node3 <- tail_node
+    #                                 |                             |
+    #                             prev-nil, next-nil    prev-node_2, next-node_4    
+        #                                                                  |
+        #                                                         prev-node_2, next-tail_node
+
+
+
+      #                  head_node -> node_1                      next_node4 <- tail_node
+    #                                 |                             |
+    #                             prev-nil, next-nil    prev-node_2, next-node_3    
+        #                                                                  |
+        #                                                         prev-node_2, next-tail_node
+    
+    self.tail.prev.next = new_node
+    new_node.prev = self.tail.prev
+    new_node.next = self.tail
+    self.tail.prev = new_node
+
+
   end
 
   def update(key, val)
