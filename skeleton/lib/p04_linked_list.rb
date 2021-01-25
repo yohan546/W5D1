@@ -22,8 +22,10 @@ end
 class LinkedList
   include Enumerable
   def initialize
-    @head = Node.new
-    @tail = Node.new
+
+    @sentinal = Node.new
+    @head = @sentinal
+    @tail = @sentinal
     @head.next = @tail
     @tail.prev = @head
   end
@@ -40,7 +42,7 @@ class LinkedList
   end
 
   def empty?
-    
+    self.empty?
   end
 
   def get(key)
